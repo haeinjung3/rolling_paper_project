@@ -5,17 +5,21 @@ import lombok.*;
 import me.junghaein.rollingpaperproject.Letter.Letter;
 import me.junghaein.rollingpaperproject.RollingPaper.entity.RollingPaper;
 import me.junghaein.rollingpaperproject.user.dto.UserRequestDto;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
-@Builder
-@AllArgsConstructor
+//@Builder
+//@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
-@Setter
+//@Setter
 @Table(name = "User")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +29,14 @@ public class User {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id", nullable = false, unique = true)
     private String userId;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    //카카오아이디나 이메일
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
     @OneToMany(mappedBy = "rollingPaper", orphanRemoval = true)
     private List<RollingPaper> myRollingPapers;
@@ -39,9 +44,46 @@ public class User {
     @OneToMany(mappedBy = "message", orphanRemoval = true)
     private List<Letter> sentMessages;
 
-    public User(UserRequestDto requestDto){
-        this.username = requestDto.getUsername();
-        this.userId = requestDto.getUserId();
-        this.password = requestDto.getPassword();
+    @Builder
+    public User(String username, String userId, String password, String email){
+        this.username = username;
+        this.userId = userId;
+        this.password = password;
+        this.email = email;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        return List.of(new SimpleGrantedAuthority("user"));
+    }
+
+    @Override
+    public String getUsername(){
+        return userId;
+    }
+
+    @Override
+    public String getPassword(){
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired(){
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked(){
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired(){
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(){
+        return true;
     }
 }

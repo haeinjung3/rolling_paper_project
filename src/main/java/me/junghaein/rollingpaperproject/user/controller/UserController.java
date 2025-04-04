@@ -1,11 +1,15 @@
 package me.junghaein.rollingpaperproject.user.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import me.junghaein.rollingpaperproject.user.dto.UserRequestDto;
 import me.junghaein.rollingpaperproject.user.entity.User;
 import me.junghaein.rollingpaperproject.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,10 +19,18 @@ public class UserController {
 
     private final UserService userService;
 
-    //로그인
-    @PostMapping("/users/login")
-    public void createUser(@RequestBody UserRequestDto requestDto){
+//    //로그인
+//    @PostMapping("/users/login")
+//    public void createUser(@RequestBody UserRequestDto requestDto){
+//
+//    }
 
+    //로그아웃
+    @GetMapping("/users/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response){
+        new SecurityContextLogoutHandler().logout(request, response,
+                SecurityContextHolder.getContext().getAuthentication());
+        return;
     }
 
     //회원가입
