@@ -1,4 +1,4 @@
-package me.junghaein.rollingpaperproject.Letter;
+package me.junghaein.rollingpaperproject.Letter.dto;
 
 import lombok.Getter;
 

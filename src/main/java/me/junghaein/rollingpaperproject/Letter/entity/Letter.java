@@ -1,7 +1,8 @@
-package me.junghaein.rollingpaperproject.Letter;
+package me.junghaein.rollingpaperproject.Letter.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import me.junghaein.rollingpaperproject.Letter.dto.LetterRequestDto;
 import me.junghaein.rollingpaperproject.user.entity.User;
 import me.junghaein.rollingpaperproject.RollingPaper.entity.RollingPaper;
 

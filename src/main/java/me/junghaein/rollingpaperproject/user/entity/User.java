@@ -2,9 +2,8 @@ package me.junghaein.rollingpaperproject.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import me.junghaein.rollingpaperproject.Letter.Letter;
+import me.junghaein.rollingpaperproject.Letter.entity.Letter;
 import me.junghaein.rollingpaperproject.RollingPaper.entity.RollingPaper;
-import me.junghaein.rollingpaperproject.user.dto.UserRequestDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

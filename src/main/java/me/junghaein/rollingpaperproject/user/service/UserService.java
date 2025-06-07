@@ -27,4 +27,9 @@ public class UserService {
     public User saveUser(User user){
         return userRepository.save(user);
     }
+
+    public User findById(Long userId){
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
 }

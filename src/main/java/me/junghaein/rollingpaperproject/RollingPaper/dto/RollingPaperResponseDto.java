@@ -1,7 +1,7 @@
 package me.junghaein.rollingpaperproject.RollingPaper.dto;
 
 import lombok.Getter;
-import me.junghaein.rollingpaperproject.Letter.Letter;
+import me.junghaein.rollingpaperproject.Letter.entity.Letter;
 import me.junghaein.rollingpaperproject.RollingPaper.entity.RollingPaper;
 import me.junghaein.rollingpaperproject.user.entity.User;
 

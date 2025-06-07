@@ -1,6 +1,9 @@
-package me.junghaein.rollingpaperproject.Letter;
+package me.junghaein.rollingpaperproject.Letter.controller;
 
 import lombok.RequiredArgsConstructor;
+import me.junghaein.rollingpaperproject.Letter.dto.LetterRequestDto;
+import me.junghaein.rollingpaperproject.Letter.dto.LetterResponseDto;
+import me.junghaein.rollingpaperproject.Letter.service.LetterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

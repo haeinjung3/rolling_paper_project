@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import me.junghaein.rollingpaperproject.RollingPaper.dto.RollingPaperRequestDto;
 import me.junghaein.rollingpaperproject.user.entity.User;
-import me.junghaein.rollingpaperproject.Letter.Letter;
+import me.junghaein.rollingpaperproject.Letter.entity.Letter;
 
 import java.time.LocalDateTime;
 import java.util.List;
