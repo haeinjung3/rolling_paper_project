@@ -3,7 +3,7 @@ package me.junghaein.rollingpaperproject.Letter.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import me.junghaein.rollingpaperproject.Letter.dto.LetterRequestDto;
-import me.junghaein.rollingpaperproject.user.entity.User;
+//import me.junghaein.rollingpaperproject.user.entity.User;
 import me.junghaein.rollingpaperproject.RollingPaper.entity.RollingPaper;
 
 import java.time.LocalDateTime;
@@ -25,9 +25,9 @@ public class Letter {
     @Column(name = "letter_type", nullable = false)
     private Long letterType;
 //long이 ㄱㅊ을까
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "writer_id", nullable = true)
-    private User writer;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "writer_id", nullable = true)
+//    private User writer;
 
     @Column(name = "nickname", nullable = false)
     private String nickname;
@@ -52,8 +52,8 @@ public class Letter {
         this.nickname = requestDto.getNickname();
         this.contents = requestDto.getContents();
         this.rollingPaper = rollingPaper;
-        this.createdAt = requestDto.getCreatedAt();
-        this.updatedAt = requestDto.getUpdatedAt();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
     //user 정보가 없을 때는 기본 정보가 들어가도록 설정하기
 
@@ -61,6 +61,6 @@ public class Letter {
         this.letterType = requestDto.getLetterType();
         this.nickname = requestDto.getNickname();
         this.contents = requestDto.getContents();
-        this.updatedAt = requestDto.getUpdatedAt();
+        this.updatedAt = LocalDateTime.now();
     }
 }

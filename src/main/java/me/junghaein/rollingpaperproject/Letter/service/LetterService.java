@@ -24,7 +24,7 @@ public class LetterService {
         Letter letter = new Letter(rollingPaper, requestDto);
 
         return new LetterResponseDto(saveLetter(letter));
-    }
+    } //rollingpaper 없을 때 처리?
 
     public LetterResponseDto selectLetter(long rollingPaperId, long letterId){
         return new LetterResponseDto(findLetter(letterId));

@@ -9,6 +9,6 @@ public class LetterRequestDto {
     private Long letterType;
     private String nickname;
     private String contents;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+//    private LocalDateTime createdAt;
+//    private LocalDateTime updatedAt;
 }

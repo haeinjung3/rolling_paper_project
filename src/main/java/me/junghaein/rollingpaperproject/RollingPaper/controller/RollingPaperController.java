@@ -3,6 +3,7 @@ package me.junghaein.rollingpaperproject.RollingPaper.controller;
 import lombok.RequiredArgsConstructor;
 import me.junghaein.rollingpaperproject.RollingPaper.dto.RollingPaperRequestDto;
 import me.junghaein.rollingpaperproject.RollingPaper.dto.RollingPaperResponseDto;
+import me.junghaein.rollingpaperproject.RollingPaper.entity.RollingPaper;
 import me.junghaein.rollingpaperproject.RollingPaper.service.RollingPaperService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class RollingPaperController {
 
     //롤링 페이퍼 생성
     @PostMapping("/rolling-paper")
-    public ResponseEntity<RollingPaperResponseDto> createRollingPaper(@RequestPart RollingPaperRequestDto requestDto){
+    public ResponseEntity<RollingPaperResponseDto> createRollingPaper(@RequestBody RollingPaperRequestDto requestDto){ //@RequestBody와 @RequestPart 차이 숙지하기
         RollingPaperResponseDto result = rollingPaperService.createRollingPaper(requestDto);
 
         return ResponseEntity.ok()
@@ -26,7 +27,7 @@ public class RollingPaperController {
     //롤링페이퍼 조회
     @GetMapping("/rolling-paper/{rolling-paperId}")
     public ResponseEntity<RollingPaperResponseDto> selectRollingPaper(
-            @PathVariable long rollingPaperId){
+            @PathVariable("rolling-paperId") long rollingPaperId){
         RollingPaperResponseDto result = rollingPaperService.selectRollingPaper(rollingPaperId);
 
         return ResponseEntity.ok()
@@ -34,13 +35,13 @@ public class RollingPaperController {
     }
 
 //    //롤링페이퍼 수정
-//    @PutMapping("/rolling-paper/{rolling-paperId}")
-//    public ResponseEntity<RollingPaper> modifyRollingPaper(@PathVariable long id, @RequestBody RollingPaperRequestDto requestDto){
-//        RollingPaper modifiedRollingPaper = rollingPaperService.modify(id, requestDto);
-//
-//        return ResponseEntity.ok()
-//                .body(modifiedRollingPaper);
-//    }
+    @PutMapping("/rolling-paper/{rolling-paperId}")
+    public ResponseEntity<RollingPaper> modifyRollingPaper(@PathVariable long id, @RequestBody RollingPaperRequestDto requestDto){
+        RollingPaper modifiedRollingPaper = rollingPaperService.modify(id, requestDto);
+
+        return ResponseEntity.ok()
+                .body(modifiedRollingPaper);
+    }
 
     //롤링 페이퍼 삭제
     @DeleteMapping("/rolling-paper/{rolling-paperId}")
