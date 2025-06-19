@@ -36,8 +36,9 @@ public class RollingPaperController {
 
 //    //롤링페이퍼 수정
     @PutMapping("/rolling-paper/{rolling-paperId}")
-    public ResponseEntity<RollingPaper> modifyRollingPaper(@PathVariable long id, @RequestBody RollingPaperRequestDto requestDto){
-        RollingPaper modifiedRollingPaper = rollingPaperService.modify(id, requestDto);
+    public ResponseEntity<RollingPaperResponseDto> modifyRollingPaper(
+            @PathVariable("rolling-paperId") long rollingPaperId, @RequestBody RollingPaperRequestDto requestDto){
+        RollingPaperResponseDto modifiedRollingPaper = rollingPaperService.modify(rollingPaperId, requestDto);
 
         return ResponseEntity.ok()
                 .body(modifiedRollingPaper);
@@ -45,7 +46,8 @@ public class RollingPaperController {
 
     //롤링 페이퍼 삭제
     @DeleteMapping("/rolling-paper/{rolling-paperId}")
-    public ResponseEntity<Void> deleteRollingPaper(@PathVariable long rollingPaperId){
+    public ResponseEntity<Void> deleteRollingPaper(
+            @PathVariable("rolling-paperId") long rollingPaperId){
         rollingPaperService.deleteRollingPaper(rollingPaperId);
 
         return ResponseEntity.ok()

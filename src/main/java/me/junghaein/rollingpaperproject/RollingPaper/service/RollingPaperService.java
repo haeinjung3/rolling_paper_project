@@ -23,34 +23,37 @@ public class RollingPaperService {
     }
 
     //롤링페이퍼 조회
-    public RollingPaperResponseDto selectRollingPaper(long id){
+    public RollingPaperResponseDto selectRollingPaper(long rollingPaperId){
 
-        return new RollingPaperResponseDto(findRollingPaper(id));
+        return new RollingPaperResponseDto(findRollingPaper(rollingPaperId));
     }
 
 //    //롤링페이퍼 수정
     @Transactional
-    public RollingPaper modify(long id, RollingPaperRequestDto requestDto){
-        RollingPaper rollingPaper = rollingPaperRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found: " +id));
+    public RollingPaperResponseDto modify(long rollingPaperId, RollingPaperRequestDto requestDto){
+        RollingPaper rollingPaper = findRollingPaper(rollingPaperId);
 
         rollingPaper.modify(requestDto);
 
-        return rollingPaper;
+        return new RollingPaperResponseDto(rollingPaper);
     }
 
     //롤링페이퍼 삭제
-    public void deleteRollingPaper(long id){
-        rollingPaperRepository.deleteById(id);
+    public void deleteRollingPaper(long rollingPaperId){
+
+        rollingPaperRepository.deleteById(rollingPaperId);
     }
 
+
+    //롤링페이퍼 저장
     public RollingPaper saveRollingPaper(RollingPaper rollingPaper){
         return rollingPaperRepository.save(rollingPaper);
     }
 
+    //롤링페이퍼 조회
     public RollingPaper findRollingPaper(long rollingPaperId){
         return rollingPaperRepository.findById(rollingPaperId).orElseThrow(() ->
-                new IllegalArgumentException("선택한 롤링페이퍼는 존재하지 않습니다.")
+                new IllegalArgumentException("not found: " + rollingPaperId)
         );
     }
 }

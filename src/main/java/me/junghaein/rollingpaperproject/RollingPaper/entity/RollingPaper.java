@@ -7,6 +7,7 @@ import me.junghaein.rollingpaperproject.RollingPaper.dto.RollingPaperRequestDto;
 import me.junghaein.rollingpaperproject.Letter.entity.Letter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -23,15 +24,13 @@ public class RollingPaper {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    //nullable 임시로 지움
     @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "rp_type", nullable = false)
-    private Long rpType;
+    private String rpType;
 
-//long으로 괜찮나
-    @Column(name = "rp_release")
+    @Column(name = "rp_release", nullable = false)
     private LocalDateTime rpRelease;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -45,12 +44,12 @@ public class RollingPaper {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "rollingPaper", orphanRemoval = true)
-    private List<Letter> messages;
+    private List<Letter> messages = new ArrayList<>(); //@Builder가 무시
 
     public RollingPaper(RollingPaperRequestDto requestDto){
         this.title = requestDto.getTitle();
         this.rpType = requestDto.getRpType();
-        this.rpRelease = LocalDateTime.now(); //임시
+        this.rpRelease = requestDto.getRpRelease();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -58,7 +57,7 @@ public class RollingPaper {
     public void modify(RollingPaperRequestDto requestDto){
         this.title = requestDto.getTitle();
         this.rpType = requestDto.getRpType();
-        this.rpRelease = LocalDateTime.now(); //임시
+        this.rpRelease = requestDto.getRpRelease();
         this.updatedAt = LocalDateTime.now();
     }
 }

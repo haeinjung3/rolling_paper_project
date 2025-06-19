@@ -6,18 +6,19 @@ import me.junghaein.rollingpaperproject.RollingPaper.entity.RollingPaper;
 //import me.junghaein.rollingpaperproject.user.entity.User;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
 public class RollingPaperResponseDto {
     private final Long id;
     private final String title;
-    private final Long rpType;
+    private final String rpType;
     private final LocalDateTime rpRelease;
 //    private final User owner;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
-//    private final List<Letter> message;
+    private final List<Letter> messages;
 
     public RollingPaperResponseDto(RollingPaper rollingPaper){
         this.id = rollingPaper.getId();
@@ -27,6 +28,6 @@ public class RollingPaperResponseDto {
 //        this.owner = rollingPaper.getOwner();
         this.createdAt = rollingPaper.getCreatedAt();
         this.updatedAt = rollingPaper.getUpdatedAt();
-//        this.message = rollingPaper.getMessages(); //이따 검색
-    }
+        this.messages = List.copyOf(rollingPaper.getMessages());
+        }
 }
