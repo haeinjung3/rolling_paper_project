@@ -24,6 +24,8 @@ public class RollingPaperController {
                 .body(result);
     }
 
+    //전체 조회?(어따 쓰지)
+
     //롤링페이퍼 조회
     @GetMapping("/rolling-paper/{rolling-paperId}")
     public ResponseEntity<RollingPaperResponseDto> selectRollingPaper(
@@ -34,7 +36,7 @@ public class RollingPaperController {
                 .body(result);
     }
 
-//    //롤링페이퍼 수정
+   //롤링페이퍼 수정
     @PutMapping("/rolling-paper/{rolling-paperId}")
     public ResponseEntity<RollingPaperResponseDto> modifyRollingPaper(
             @PathVariable("rolling-paperId") long rollingPaperId, @RequestBody RollingPaperRequestDto requestDto){

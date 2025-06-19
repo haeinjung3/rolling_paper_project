@@ -23,8 +23,8 @@ public class Letter {
     private Long id;
 
     @Column(name = "letter_type", nullable = false)
-    private Long letterType;
-//long이 ㄱㅊ을까
+    private String letterType;
+
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "writer_id", nullable = true)
 //    private User writer;
@@ -36,7 +36,7 @@ public class Letter {
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rp_id", nullable = false)
+    @JoinColumn(name = "rollingPaperId", nullable = false)
     private RollingPaper rollingPaper;
 
     @Column(name = "created_at", nullable = false)

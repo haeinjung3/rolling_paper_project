@@ -9,21 +9,22 @@ import java.time.LocalDateTime;
 
 @Getter
 public class LetterResponseDto {
-
-    private final Long letterType;
+    private final Long id;
+    private final String letterType;
 //    private final User writer;
     private final String nickname;
     private final String contents;
-    private final RollingPaper rollingPaper;
+    private final Long rollingPaperId;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
     public LetterResponseDto(Letter letter){
+        this.id = letter.getId();
         this.letterType = letter.getLetterType();
 //        this.writer = letter.getWriter();
         this.nickname = letter.getNickname();
         this.contents = letter.getContents();
-        this.rollingPaper = letter.getRollingPaper();
+        this.rollingPaperId = letter.getRollingPaper().getId();
         this.createdAt = letter.getCreatedAt();
         this.updatedAt = letter.getUpdatedAt();
     }
