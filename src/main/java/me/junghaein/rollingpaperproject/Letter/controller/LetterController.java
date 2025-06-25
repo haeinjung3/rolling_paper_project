@@ -7,6 +7,8 @@ import me.junghaein.rollingpaperproject.Letter.service.LetterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @RestController
@@ -33,6 +35,26 @@ public class LetterController {
         return ResponseEntity.ok()
                 .body(responseDto);
     }
+
+    //편지 전체 조회
+    @GetMapping("/rolling-paper/letter")
+    public ResponseEntity<List<LetterResponseDto>> selectLetterAll(){
+        List<LetterResponseDto> responseDtos = letterService.selectletterAll();
+
+        return ResponseEntity.ok()
+                .body(responseDtos);
+        }
+
+
+    //특정 유저 편지 전체 조회
+//    @GetMapping("/rolling-paper/{rolling-paperId}/letter/user/{userId}")
+//    public ResponseEntity<List<LetterResponseDto>> selectLetterByUser(User user){
+//        List<LetterResponseDto> responseDtos = letterService.selectLetterByUser(user);
+//
+//        return ResponseEntity.ok()
+//                .body(responseDtos);
+//    }
+
 
     //편지 수정
     @PutMapping("/rolling-paper/{rolling-paperId}/letter/{letterId}")

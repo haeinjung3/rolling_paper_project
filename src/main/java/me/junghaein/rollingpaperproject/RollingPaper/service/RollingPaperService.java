@@ -8,6 +8,8 @@ import me.junghaein.rollingpaperproject.RollingPaper.repository.RollingPaperRepo
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class RollingPaperService {
@@ -22,16 +24,29 @@ public class RollingPaperService {
         return new RollingPaperResponseDto(saveRollingPaper(rollingPaper));
     }
 
+    //롤링페이퍼 전체 조회
+    public List<RollingPaperResponseDto> selectRollingPaperAll() {
+        return rollingPaperRepository.findAll().stream()
+                .map(RollingPaperResponseDto::new).toList();
+    }
+
+    //특정 유저 롤링페이퍼 전체 조회
+//    public List<RollingPaperResponseDto> selectRollingPaperByUser(User user) {
+//        return findRollingPaperByUser.stream()
+//                .map(RollingPaperResponseDto::new).toList();
+//    }
+
     //롤링페이퍼 조회
     public RollingPaperResponseDto selectRollingPaper(long rollingPaperId){
-
+        //설정한 날짜가 되었는지 검사
         return new RollingPaperResponseDto(findRollingPaper(rollingPaperId));
     }
 
-//    //롤링페이퍼 수정
+    //롤링페이퍼 수정
     @Transactional
     public RollingPaperResponseDto modify(long rollingPaperId, RollingPaperRequestDto requestDto){
         RollingPaper rollingPaper = findRollingPaper(rollingPaperId);
+        //유저 권한 검사
 
         rollingPaper.modify(requestDto);
 
@@ -40,7 +55,7 @@ public class RollingPaperService {
 
     //롤링페이퍼 삭제
     public void deleteRollingPaper(long rollingPaperId){
-
+        //유저 권한 검사
         rollingPaperRepository.deleteById(rollingPaperId);
     }
 
@@ -56,4 +71,11 @@ public class RollingPaperService {
                 new IllegalArgumentException("not found: " + rollingPaperId)
         );
     }
+
+    //유저로 롤링페이퍼 조회
+//    public List<RollingPaper> findRollingPaperByUser(User user){
+//        return rollingPaperRepository.findByUser(user).orElseThrow(() ->
+//                new IllegalArgumentException("not found: " + user)
+//        );
+//    }
 }
