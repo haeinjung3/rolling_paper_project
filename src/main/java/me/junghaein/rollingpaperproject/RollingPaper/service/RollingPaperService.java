@@ -18,13 +18,16 @@ public class RollingPaperService {
 //    private final LetterRepository letterRepository;
 
     //롤링페이퍼 등록
+    @Transactional
     public RollingPaperResponseDto createRollingPaper(RollingPaperRequestDto requestDto){
+        //허가된 사용자만 등록할 수 있도록 예외 처리 예정
         RollingPaper rollingPaper = new RollingPaper(requestDto);
 
         return new RollingPaperResponseDto(saveRollingPaper(rollingPaper));
     }
 
     //롤링페이퍼 전체 조회
+    @Transactional(readOnly = true)
     public List<RollingPaperResponseDto> selectRollingPaperAll() {
         return rollingPaperRepository.findAll().stream()
                 .map(RollingPaperResponseDto::new).toList();
@@ -37,6 +40,7 @@ public class RollingPaperService {
 //    }
 
     //롤링페이퍼 조회
+    @Transactional(readOnly = true)
     public RollingPaperResponseDto selectRollingPaper(long rollingPaperId){
         //설정한 날짜가 되었는지 검사
         return new RollingPaperResponseDto(findRollingPaper(rollingPaperId));
@@ -44,9 +48,9 @@ public class RollingPaperService {
 
     //롤링페이퍼 수정
     @Transactional
-    public RollingPaperResponseDto modify(long rollingPaperId, RollingPaperRequestDto requestDto){
+    public RollingPaperResponseDto modifyRollingPaper(long rollingPaperId, RollingPaperRequestDto requestDto){
         RollingPaper rollingPaper = findRollingPaper(rollingPaperId);
-        //유저 권한 검사
+        //유저 권한 검사(롤페 작성한 본인만) 추가 예정
 
         rollingPaper.modify(requestDto);
 
@@ -54,8 +58,9 @@ public class RollingPaperService {
     }
 
     //롤링페이퍼 삭제
+    @Transactional
     public void deleteRollingPaper(long rollingPaperId){
-        //유저 권한 검사
+        //유저 권한 검사(작성자, 관리자) 추가 예정
         rollingPaperRepository.deleteById(rollingPaperId);
     }
 

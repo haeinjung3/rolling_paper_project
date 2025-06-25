@@ -36,10 +36,12 @@ public class LetterController {
                 .body(responseDto);
     }
 
-    //편지 전체 조회
-    @GetMapping("/rolling-paper/letter")
-    public ResponseEntity<List<LetterResponseDto>> selectLetterAll(){
-        List<LetterResponseDto> responseDtos = letterService.selectletterAll();
+    //롤페별 편지 전체 조회
+    @GetMapping("/rolling-paper/{rolling-paperId}/letter")
+    public ResponseEntity<List<LetterResponseDto>> selectLetterAll(
+            @PathVariable("rolling-paperId") long rollingPaperId
+    ){
+        List<LetterResponseDto> responseDtos = letterService.selectletterAll(rollingPaperId);
 
         return ResponseEntity.ok()
                 .body(responseDtos);
@@ -47,7 +49,7 @@ public class LetterController {
 
 
     //특정 유저 편지 전체 조회
-//    @GetMapping("/rolling-paper/{rolling-paperId}/letter/user/{userId}")
+//    @GetMapping("/rolling-paper/letter/user/{userId}")
 //    public ResponseEntity<List<LetterResponseDto>> selectLetterByUser(User user){
 //        List<LetterResponseDto> responseDtos = letterService.selectLetterByUser(user);
 //

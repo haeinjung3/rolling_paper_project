@@ -58,7 +58,7 @@ public class RollingPaperController {
     @PutMapping("/rolling-paper/{rolling-paperId}")
     public ResponseEntity<RollingPaperResponseDto> modifyRollingPaper(
             @PathVariable("rolling-paperId") long rollingPaperId, @RequestBody RollingPaperRequestDto requestDto){
-        RollingPaperResponseDto modifiedRollingPaper = rollingPaperService.modify(rollingPaperId, requestDto);
+        RollingPaperResponseDto modifiedRollingPaper = rollingPaperService.modifyRollingPaper(rollingPaperId, requestDto);
 
         return ResponseEntity.ok()
                 .body(modifiedRollingPaper);
