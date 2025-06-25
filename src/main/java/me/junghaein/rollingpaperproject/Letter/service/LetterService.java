@@ -10,6 +10,7 @@ import me.junghaein.rollingpaperproject.RollingPaper.service.RollingPaperService
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,8 +35,16 @@ public class LetterService {
     //편지 상세 조회
     @Transactional(readOnly = true)
     public LetterResponseDto selectLetter(long rollingPaperId, long letterId){
-        //설정한 날짜가 되거나 편지 작성자인지 검사 작성 예정
-        return new LetterResponseDto(findLetter(letterId));
+
+        Letter letter = findLetter(letterId);
+
+        //편지 작성자인지 검사 작성 예정
+        boolean b = letter.getRollingPaper().getRpRelease().isAfter(LocalDateTime.now());
+        if(b){
+            throw  new IllegalArgumentException("아직 공개 시간이 아닙니다");
+        }
+
+        return new LetterResponseDto(letter);
     }
 
     //롤페별 편지 전체 조회

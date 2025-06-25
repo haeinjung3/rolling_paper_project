@@ -42,7 +42,6 @@ public class RollingPaperService {
     //롤링페이퍼 조회
     @Transactional(readOnly = true)
     public RollingPaperResponseDto selectRollingPaper(long rollingPaperId){
-        //설정한 날짜가 되었는지 검사
         return new RollingPaperResponseDto(findRollingPaper(rollingPaperId));
     }
 
