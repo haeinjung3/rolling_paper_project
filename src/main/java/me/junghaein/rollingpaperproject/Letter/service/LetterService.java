@@ -40,7 +40,7 @@ public class LetterService {
 
         //편지 작성자인지 검사 작성 예정
         boolean b = letter.getRollingPaper().getRpRelease().isAfter(LocalDateTime.now());
-        if(b){
+        if(b){ //동시에 편지 작성자가 아닐 때
             throw  new IllegalArgumentException("아직 공개 시간이 아닙니다");
         }
 
