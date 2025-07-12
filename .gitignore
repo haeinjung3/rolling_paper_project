@@ -15,8 +15,8 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-*.yml
-*.gradle
+.yml
+.gradle
 
 ### Eclipse ###
 .apt_generated
