@@ -34,7 +34,7 @@ public class TokenProviderTest {
     void generateToken() {
         User testUser = userRepository.save(User.builder()
                 .username("name")
-                .userId("id")
+                .userId("userId")
                 .password("test")
                 .email("user@gmail.com")
                 .build());
@@ -69,6 +69,20 @@ public class TokenProviderTest {
         assertThat(result).isTrue();
     }
 
+    @DisplayName("getUserId(): 토큰으로 유저 ID를 가져올 수 있다.")
+    @Test
+    void getId() {
+        Long userId = 1L;
+        String token = JwtFactory.builder()
+                .clames(Map.of("id", userId))
+                .build()
+                .createToken(jwtProperties);
+
+        Long userIdByToken = tokenProvider.getId(token);
+
+        assertThat(userIdByToken).isEqualTo(userId);
+    }
+
     @DisplayName("getAuthentication(): 토큰 기반으로 인증 정보를 가져올 수 있다.")
     @Test
     void getAuthentication(){
@@ -81,19 +95,5 @@ public class TokenProviderTest {
         Authentication authentication = tokenProvider.getAuthentication(token);
         assertThat(((UserDetails) authentication.getPrincipal()).getUsername())
                 .isEqualTo(userEmail);
-    }
-
-    @DisplayName("getUserId(): 토큰으로 유저 ID를 가져올 수 있다.")
-    @Test
-    void getUserId() {
-        Long userId = 1L;
-        String token = JwtFactory.builder()
-                .clames(Map.of("id", userId))
-                .build()
-                .createToken(jwtProperties);
-
-        Long userIdByToken = tokenProvider.getUserId(token);
-
-        assertThat(userIdByToken).isEqualTo(userId);
     }
 }
