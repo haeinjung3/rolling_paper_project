@@ -6,7 +6,6 @@ import me.junghaein.rollingpaperproject.Common.config.jwt.TokenProvider;
 import me.junghaein.rollingpaperproject.RollingPaperProjectApplication;
 import me.junghaein.rollingpaperproject.user.entity.User;
 import me.junghaein.rollingpaperproject.user.repository.UserRepository;
-import me.junghaein.rollingpaperproject.user.service.UserDetailService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class TokenProviderTest {
     @Test
     void generateToken() {
         User testUser = userRepository.save(User.builder()
-                .username("name")
+                .nickname("name")
                 .userId("userId")
                 .password("test")
                 .email("user@gmail.com")

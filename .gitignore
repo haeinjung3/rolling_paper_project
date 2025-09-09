@@ -17,6 +17,7 @@ out/
 !**/src/test/**/out/
 *.yml
 *.gradle
+*.properties
 
 ### Eclipse ###
 .apt_generated

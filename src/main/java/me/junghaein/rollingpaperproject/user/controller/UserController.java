@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import me.junghaein.rollingpaperproject.user.dto.UserRequestDto;
-import me.junghaein.rollingpaperproject.user.entity.User;
 import me.junghaein.rollingpaperproject.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,24 +18,18 @@ public class UserController {
 
     private final UserService userService;
 
-    //로그인
-    @PostMapping("/users/login")
-    public void createUser(@RequestBody UserRequestDto requestDto){
-        userService.createUser(requestDto);
-    }
-
     //로그아웃
     @GetMapping("/users/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response){
-        new SecurityContextLogoutHandler().logout(request, response,
+    public void logout(HttpServletRequest requestDto, HttpServletResponse responseDto){
+        new SecurityContextLogoutHandler().logout(requestDto, responseDto,
                 SecurityContextHolder.getContext().getAuthentication());
         return;
     }
 
     //회원가입
     @PostMapping("/users/signup")
-    public ResponseEntity<Long> signUpUser(@RequestBody UserRequestDto request){  //@Valid 작성
-        Long savedUser = userService.createUser(request);
+    public ResponseEntity<Long> signUpUser(@RequestBody UserRequestDto requestDto){  //@Valid 작성
+        Long savedUser = userService.createUser(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 

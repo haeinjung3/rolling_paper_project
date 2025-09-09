@@ -17,7 +17,7 @@ public class UserService {
     public Long createUser(UserRequestDto requestDto){
 
         return saveUser(User.builder()
-                .username(requestDto.getUsername())
+                .nickname(requestDto.getNickname())
                 .userId(requestDto.getUserId())
                 .password(bCryptPasswordEncoder.encode(requestDto.getPassword()))  //시큐리티 설정에서 인코딩용으로 등록한 빈
                 .email(requestDto.getEmail())
@@ -28,8 +28,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findById(Long userId){
-        return userRepository.findById(userId)
+    public User findById(Long Id){
+        return userRepository.findById(Id)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
 }

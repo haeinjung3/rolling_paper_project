@@ -25,8 +25,8 @@ public class User implements UserDetails {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "user_name", nullable = false)
-    private String username;
+    @Column(name = "nickname", nullable = false)
+    private String nickname;
 
     @Column(name = "user_id", nullable = false)  //, unique = true
     private String userId;
@@ -44,8 +44,8 @@ public class User implements UserDetails {
 //    private List<Letter> sentMessages;
 
     @Builder
-    public User(String username, String userId, String password, String email, String auth){
-        this.username = username;
+    public User(String nickname, String userId, String password, String email, String auth){
+        this.nickname = nickname;
         this.userId = userId;
         this.password = password;
         this.email = email;
